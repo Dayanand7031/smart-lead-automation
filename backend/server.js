@@ -15,6 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 // ---------- ROUTES ----------
+app.get("/test", (req, res) => {
+  res.send("TEST OK");
+});
+
 app.use("/api/leads", leadRoutes);
 
 // ---------- CRON JOB ----------
