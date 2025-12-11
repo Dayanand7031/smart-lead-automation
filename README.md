@@ -31,9 +31,9 @@ This project demonstrates:
 - dotenv
 - CORS
 
-## 📦 Features
+## Features
 
-### ✅ Batch Input  
+### Batch Input  
 Users can submit a list of names separated by commas.
 
 ###  API Enrichment  
