@@ -124,6 +124,47 @@ Start frontend:
 
 npm run dev
 
+
+## Architecture Explanation
+# Batch Request Handling
+# Backend processes batches efficiently:
+
+- Splits names into an array
+- Calls Nationalize API for each
+- Applies business rules
+- Saves results to MongoDB
+- Returns processed output
+- 
+## Business Logic
+if (probability >= 0.6)
+    status = "Verified";
+else
+    status = "To Check";
+
+## Database Storage
+
+# Mongoose schema stores:
+
+- name
+- country
+- probability
+- status
+- synced
+- syncedAt
+
+# Automation & Idempotency
+
+Every 5 minutes:
+nodeCron.schedule("*/5 * * * *", async () => {
+  const lead = await Lead.findOneAndUpdate(
+    { status: "Verified", synced: false },
+    { $set: { synced: true, syncedAt: new Date() } },
+    { new: true }
+  );
+});
+
+
+
 Database Screenshot
 
 <img width="1897" height="765" alt="image" src="https://github.com/user-attachments/assets/a77977c3-cc36-4db6-8d8a-fad284f03480" />
